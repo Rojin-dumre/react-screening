@@ -1,25 +1,16 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useReducer } from "react";
+import ColorButton from "./ColorButton";
+import ColorHistory from "./ColorHistory";
+import ColorContext from "./ColorContext";
+import { reducer, initialState } from "./reducer";
 
-function App() {
+export default function App() {
+  const [state, dispatch] = useReducer(reducer, initialState);
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ColorContext.Provider value={{ state, dispatch }}>
+      <ColorButton />
+      <ColorHistory />
+    </ColorContext.Provider>
   );
 }
-
-export default App;
